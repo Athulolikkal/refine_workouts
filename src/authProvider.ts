@@ -1,14 +1,19 @@
 import { AuthBindings } from "@refinedev/core";
+import axios from "./AuthenticationApis/api";
 
 export const TOKEN_KEY = "refine-auth";
 
 export const authProvider: AuthBindings = {
   login: async ({ username, email, password }) => {
-    if ((username || email) && password) {
-      localStorage.setItem(TOKEN_KEY, username);
+    console.log(email,password)
+    const response = await axios.post("/isValidUser", { email, password });
+    const isValid = response?.data?.status;
+    console.log(isValid);
+    if (isValid) {
+      localStorage.setItem(TOKEN_KEY, email);
       return {
         success: true,
-        redirectTo: "/",
+        redirectTo: "/blog-posts",
       };
     }
 
@@ -20,6 +25,9 @@ export const authProvider: AuthBindings = {
       },
     };
   },
+  
+  
+
   logout: async () => {
     localStorage.removeItem(TOKEN_KEY);
     return {
@@ -46,7 +54,7 @@ export const authProvider: AuthBindings = {
     if (token) {
       return {
         id: 1,
-        name: "John Doe",
+        name: token,
         avatar: "https://i.pravatar.cc/300",
       };
     }
