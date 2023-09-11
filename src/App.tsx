@@ -1,3 +1,4 @@
+import {useState,useEffect} from 'react'
 import { Authenticated,  Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -33,6 +34,8 @@ import { Login } from "./pages/login";
 import Register from "./pages/register/index"
 
 function App() {
+
+
   return (
     <BrowserRouter>
      
@@ -58,11 +61,7 @@ function App() {
                   },
                 }
               ]}
-              options={{
-                syncWithLocation: true,
-                warnWhenUnsavedChanges: true,
-                projectId: "s60czq-QL7zSa-D3wfh6",
-              }}
+              
             >
               <Routes>
                 <Route
@@ -81,7 +80,7 @@ function App() {
                   <Route path="/blog-posts">
                     <Route index element={<BlogPostList />} />
                     <Route path="create" element={<BlogPostCreate />} />
-                    <Route path="edit/:id" element={<BlogPostEdit />} />
+                    <Route path="edit/:id" element={<BlogPostEdit recordItemId={""}  />} />
                     <Route path="show/:id" element={<BlogPostShow />} />
                   </Route>
                   
