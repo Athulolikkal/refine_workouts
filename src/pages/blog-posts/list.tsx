@@ -14,9 +14,9 @@ import { BlogPostEdit } from "../../pages/blog-posts/edit";
 import axios from "../../AuthenticationApis/api";
 
 export const BlogPostList: React.FC<IResourceComponentsProps> = () => {
-  const { dataGridProps } = useDataGrid();
+  // const { dataGridProps } = useDataGrid();
   const [data, setData] = useState([]);
-
+  // console.log(dataGridProps)
   const dataFetch = async () => {
     try {
       const response = await axios.get("/users");
@@ -72,7 +72,7 @@ export const BlogPostList: React.FC<IResourceComponentsProps> = () => {
 
   return (
     <List>
-      <DataGrid {...dataGridProps} rows={data} columns={columns} autoHeight />
+      <DataGrid  rows={data} columns={columns} autoHeight />
     </List>
   );
 };
